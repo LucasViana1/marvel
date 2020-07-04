@@ -1,14 +1,17 @@
 // @flow
 import React from 'react';
 
-import './App.css';
-
-import Access from './pages/Access';
+import { BrowserRouter } from 'react-router-dom';
+import GlobalStyle from './styles/global';
+import Routes from './routes';
 
 function App() {
   return (
     <>
-      <Access />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+      <GlobalStyle />
     </>
   );
 }
