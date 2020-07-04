@@ -6,20 +6,24 @@
   "author": "Lucas Viana Cunha",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --port 3000",
-    "build": "webpack-dev-server --mode production"
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack-dev-server --mode production",
+    "postinstall": "flow-typed install"
   },
   "dependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "style-loader": "^1.2.1",
+    "styled-components": "^5.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -41,5 +45,8 @@
     "flow-typed": "^3.1.0",
     "prettier": "^2.0.5",
     "webpack-dev-server": "^3.11.0"
+  },
+  "resolutions": {
+    "flow-typed/semver": "7.1.3"
   }
 }
