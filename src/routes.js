@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
@@ -5,7 +6,7 @@ import Access from './pages/Access';
 import Home from './pages/Home';
 import Character from './pages/Character';
 
-const Routes: React.FC = () => {
+const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact component={Access} />

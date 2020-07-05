@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build": "webpack-dev-server --mode production",
-    "postinstall": "flow-typed install"
+    "postinstall": "flow-typed install",
+    "flow": "flow"
   },
   "dependencies": {
     "@babel/cli": "^7.10.4",
@@ -19,9 +20,15 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
+    "md5": "^2.2.1",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-moment": "^0.9.7",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3",
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
     "webpack": "^4.43.0",

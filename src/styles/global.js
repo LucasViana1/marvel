@@ -25,4 +25,8 @@ export default createGlobalStyle`
   button{
     cursor: pointer;
   }
+
+  table{
+    border-spacing: 0;
+  }
 `;
