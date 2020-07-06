@@ -12,7 +12,8 @@ import { Container, CharacterTable, HeadText, Pagination } from './styles';
 import CharacterTableItem from '../../components/CharacterTableItem';
 
 const Home = () => {
-  const [actualPage, setActualPage] = useState(0);
+  const [actualPage, setActualPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
   const { characters } = useSelector(state => state.characters);
 
@@ -31,12 +32,16 @@ const Home = () => {
   function handlePage(pageNumber) {
     // console.log('quantityPage');
     // console.log(quantityPage);
-    const totalPages = actualPage + pageNumber;
-    dispatch(charactersLoadUpdated(totalPages));
-    setActualPage(totalPages);
+    const total = totalPage + pageNumber;
+    dispatch(charactersLoadUpdated(total));
+    setTotalPage(total);
+    setActualPage(total / 14 + 1);
+
+    // console.log('totalPages');
+    // console.log(totalPages);
   }
-  console.log('teste');
-  console.log(useSelector(state => state.characters));
+  // console.log('teste');
+  // console.log(useSelector(state => state.characters));
 
   return (
     <Container>
@@ -56,11 +61,12 @@ const Home = () => {
         </tbody>
       </CharacterTable>
       <Pagination>
-        <button type="button" onClick={() => handlePage(-10)}>
-          anterior
+        <button type="button" onClick={() => handlePage(-14)}>
+          Anterior
         </button>
-        <button type="button" onClick={() => handlePage(10)}>
-          próximo
+        <span>{actualPage}</span>
+        <button type="button" onClick={() => handlePage(14)}>
+          Próximo
         </button>
       </Pagination>
     </Container>
