@@ -44,7 +44,9 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
     // console.log('saga request');
     // console.log(privateKey);
     // console.log(publicKey);
-    const { timestamp, publicKey, hash } = yield select(state => state);
+    const { timestamp, publicKey, hash } = yield select(
+      state => state.characters,
+    );
 
     // TESTE
     // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
@@ -71,22 +73,29 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
   }
 }
 
-function* getCharacterComics({ payload: { characterId } }) {
+function* getCharacterById({ payload: { characterId } }) {
   try {
-    // console.log('saga request');
-    // console.log(privateKey);
-    // console.log(publicKey);
-    // const { timestamp, publicKey, hash } = yield select(state => state);
+    const { timestamp, publicKey, hash, characters } = yield select(
+      state => state.characters,
+    );
+
+    console.log('all characters');
+    console.log(characters);
+
+    const character = characters.find(item => characterId === item.id);
+
+    console.log('character found');
+    console.log(character);
 
     // TESTE
-    const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
-    const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
-    const timestamp = Math.floor(Date.now() / 1000);
-    const hash = md5(timestamp + privateKey + publicKey);
+    // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
+    // const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
+    // const timestamp = Math.floor(Date.now() / 1000);
+    // const hash = md5(timestamp + privateKey + publicKey);
 
     const response = yield call(
       api.get,
-      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`,
+      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=80`,
     );
 
     const { results } = response.data.data;
@@ -107,5 +116,5 @@ function* getCharacterComics({ payload: { characterId } }) {
 export default all([
   takeLatest('@characters/LOAD_REQUEST', getCharacters),
   takeLatest('@characters/LOAD_UPDATED', getUpdateCharacters),
-  takeLatest('@characters/LOAD_COMICS_REQUEST', getCharacterComics),
+  takeLatest('@characters/LOAD_COMICS_REQUEST', getCharacterById),
 ]);
