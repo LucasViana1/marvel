@@ -11,11 +11,12 @@ import {
 
 function* getCharacters({ payload: { privateKey, publicKey } }) {
   try {
-    console.log('saga request');
-    console.log(privateKey);
-    console.log(publicKey);
+    // console.log('saga request');
+    // console.log(privateKey);
+    // console.log(publicKey);
 
     const timestamp = Math.floor(Date.now() / 1000);
+
     // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
     // const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
     const hash = md5(timestamp + privateKey + publicKey);
@@ -27,9 +28,9 @@ function* getCharacters({ payload: { privateKey, publicKey } }) {
 
     const { results } = response.data.data;
 
-    console.log('saga data');
-    console.log(response);
-    console.log(results);
+    // console.log('saga data');
+    // console.log(response);
+    // console.log(results);
     yield put(charactersLoadSuccess(results, timestamp, publicKey, hash));
   } catch (error) {
     // yield put(charactersLoadFailure());
@@ -61,9 +62,9 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
 
     const { results } = response.data.data;
 
-    console.log('saga data update');
+    // console.log('saga data update');
     // console.log(response);
-    console.log(results);
+    // console.log(results);
     yield put(charactersLoadUpdateSuccess(results));
   } catch (error) {
     // yield put(charactersLoadFailure());
@@ -80,13 +81,13 @@ function* getCharacterById({ payload: { characterId } }) {
     // );
     const { characters } = yield select(state => state.characters);
 
-    console.log('all characters');
-    console.log(characters);
+    // console.log('all characters');
+    // console.log(characters);
 
     const character = characters.find(item => characterId === item.id);
 
-    console.log('character found');
-    console.log(character);
+    // console.log('character found');
+    // console.log(character);
 
     // TESTE
     const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
@@ -101,9 +102,9 @@ function* getCharacterById({ payload: { characterId } }) {
 
     const { results } = response.data.data;
 
-    console.log('saga data comics');
+    // console.log('saga data comics');
     // console.log(response);
-    console.log(results);
+    // console.log(results);
     yield put(charactersLoadComicsSuccess(character, results));
   } catch (error) {
     // yield put(charactersLoadFailure());
