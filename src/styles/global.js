@@ -24,6 +24,12 @@ export default createGlobalStyle`
 
   button{
     cursor: pointer;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
   }
 
   table{
