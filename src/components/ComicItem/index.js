@@ -22,8 +22,9 @@ type Props = {
 };
 
 const ComicItem = ({ comic }: Props) => {
-  console.log('props comic item');
-  console.log(comic);
+  // console.log('props comic item');
+  // console.log(comic);
+
   return (
     <Container>
       <ContainerImage>
@@ -34,12 +35,17 @@ const ComicItem = ({ comic }: Props) => {
       </ContainerImage>
       <ContainerDetails>
         <Header>
-          <h4>{`Titulo: ${comic.title}`}</h4>
-          <h4>{`Número de capa: ${comic.issueNumber}`}</h4>
+          <h3>{`Título: ${comic.title}`}</h3>
+          <h4>{`Nº capa: ${comic.issueNumber}`}</h4>
         </Header>
         <Description>
-          <p>{`Descrição: ${comic.description || 'No description found!'}`}</p>
-          {/* <div dangerouslySetInnerHTML={{ __html: comic.description }} /> */}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `Descrição: ${
+                comic.description || 'No description found!'
+              }`,
+            }}
+          />
         </Description>
       </ContainerDetails>
     </Container>
