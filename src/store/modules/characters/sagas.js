@@ -22,7 +22,7 @@ function* getCharacters({ payload: { privateKey, publicKey } }) {
 
     const response = yield call(
       api.get,
-      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=10&offset=0`,
+      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=0`,
     );
 
     const { results } = response.data.data;
@@ -56,7 +56,7 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
 
     const response = yield call(
       api.get,
-      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=10&offset=${quantityPage}`,
+      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=${quantityPage}`,
     );
 
     const { results } = response.data.data;
@@ -75,9 +75,10 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
 
 function* getCharacterById({ payload: { characterId } }) {
   try {
-    const { timestamp, publicKey, hash, characters } = yield select(
-      state => state.characters,
-    );
+    // const { timestamp, publicKey, hash, characters } = yield select(
+    //   state => state.characters,
+    // );
+    const { characters } = yield select(state => state.characters);
 
     console.log('all characters');
     console.log(characters);
@@ -88,14 +89,14 @@ function* getCharacterById({ payload: { characterId } }) {
     console.log(character);
 
     // TESTE
-    // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
-    // const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
-    // const timestamp = Math.floor(Date.now() / 1000);
-    // const hash = md5(timestamp + privateKey + publicKey);
+    const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
+    const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
+    const timestamp = Math.floor(Date.now() / 1000);
+    const hash = md5(timestamp + privateKey + publicKey);
 
     const response = yield call(
       api.get,
-      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=80`,
+      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=10`,
     );
 
     const { results } = response.data.data;
@@ -103,7 +104,7 @@ function* getCharacterById({ payload: { characterId } }) {
     console.log('saga data comics');
     // console.log(response);
     console.log(results);
-    yield put(charactersLoadComicsSuccess(results));
+    yield put(charactersLoadComicsSuccess(character, results));
   } catch (error) {
     // yield put(charactersLoadFailure());
     window.alert('Public or private key invalidates!');
