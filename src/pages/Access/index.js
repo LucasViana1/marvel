@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { charactersLoadRequest } from '../../store/modules/characters/actions';
 
+import { Container, Form, Input, Button, Title } from './styles';
+
 const Access = () => {
   const [privateKey, setPrivateKey] = useState('');
   const [publicKey, setPublicKey] = useState('');
@@ -15,8 +17,6 @@ const Access = () => {
   const { characters } = useSelector(state => state.characters);
 
   useEffect(() => {
-    console.log('characters');
-    console.log(characters);
     if (characters.length !== 0) {
       history.push('/home');
     }
@@ -35,21 +35,22 @@ const Access = () => {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <input
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <Title>Dados de acesso</Title>
+        <Input
           type="text"
           placeholder="private_key"
           onChange={event => setPrivateKey(event.target.value)}
         />
-        <input
+        <Input
           type="text"
           placeholder="public_key"
           onChange={event => setPublicKey(event.target.value)}
         />
-        <button type="submit">Access</button>
-      </form>
-    </section>
+        <Button type="submit">acessar</Button>
+      </Form>
+    </Container>
   );
 };
 
