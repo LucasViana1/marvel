@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   publicKey: '',
   hash: '',
   comics: [],
+  characterDetails: {},
 };
 
 const characters: any = (state = INITIAL_STATE, action) => {
@@ -45,6 +46,7 @@ const characters: any = (state = INITIAL_STATE, action) => {
       console.log(action);
       return {
         ...state,
+        characterDetails: action.payload.characterDetails,
         comics: action.payload.comics,
       };
     default:

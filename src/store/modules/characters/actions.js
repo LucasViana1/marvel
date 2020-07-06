@@ -41,10 +41,14 @@ export function charactersLoadUpdateSuccess(characters: any[]) {
     },
   };
 }
-export function charactersLoadComicsSuccess(comics: any[]) {
+export function charactersLoadComicsSuccess(
+  characterDetails: any,
+  comics: any[],
+) {
   return {
     type: '@characters/LOAD_COMICS_SUCCESS',
     payload: {
+      characterDetails,
       comics,
     },
   };
