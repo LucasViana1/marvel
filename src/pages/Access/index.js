@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { charactersLoadRequest } from '../../store/modules/characters/actions';
 
@@ -14,13 +14,13 @@ const Access = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { characters } = useSelector(state => state.characters);
+  // const { characters } = useSelector(state => state.characters);
 
-  useEffect(() => {
-    if (characters.length !== 0) {
-      history.push('/home');
-    }
-  }, [characters, history]);
+  // useEffect(() => {
+  //   if (characters.length !== 0) {
+  //     history.push('/home');
+  //   }
+  // }, [characters, history]);
 
   function handleSubmit(event) {
     if (!privateKey || !publicKey) {
@@ -30,7 +30,7 @@ const Access = () => {
     }
 
     dispatch(charactersLoadRequest(privateKey, publicKey));
-
+    history.push('/home');
     event.preventDefault();
   }
 
