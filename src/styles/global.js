@@ -10,16 +10,14 @@ export default createGlobalStyle`
 
   body{
     -webkit-font-smothing: antialiased;
+    background: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
   }
-
-  /* body, input, button{
-    font: 16px Roboto, sans-serif
-  } */
 
   #app{
     max-width: 960px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 70px 0px;
   }
 
   button{
