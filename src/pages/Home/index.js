@@ -36,7 +36,7 @@ const Home = () => {
     setActualPage(totalPages);
   }
   console.log('teste');
-  console.log(useSelector(state => state));
+  console.log(useSelector(state => state.characters));
 
   return (
     <Container>

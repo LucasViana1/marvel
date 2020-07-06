@@ -12,7 +12,7 @@ const Access = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { characters } = useSelector(state => state);
+  const { characters } = useSelector(state => state.characters);
 
   useEffect(() => {
     console.log('characters');
