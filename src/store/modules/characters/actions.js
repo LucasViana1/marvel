@@ -1,4 +1,24 @@
 // @flow
+type Character = {
+  id: number,
+  description: string,
+  name: string,
+  modified: Date,
+  thumbnail: {
+    path: string,
+    extension: string,
+  },
+};
+type Comic = {
+  title: string,
+  description: string,
+  issueNumber: number,
+  thumbnail: {
+    path: string,
+    extension: string,
+  },
+};
+
 export function charactersLoadRequest(privateKey: string, publicKey: string) {
   return {
     type: '@characters/LOAD_REQUEST',
@@ -18,8 +38,8 @@ export function loadCharacterById(characterId: number) {
 }
 
 export function charactersLoadSuccess(
-  characters: any[],
-  timestamp: any,
+  characters: Character[],
+  timestamp: number,
   publicKey: string,
   hash: string,
 ) {
@@ -33,7 +53,7 @@ export function charactersLoadSuccess(
     },
   };
 }
-export function charactersLoadUpdateSuccess(characters: any[]) {
+export function charactersLoadUpdateSuccess(characters: Character[]) {
   return {
     type: '@characters/LOAD_UPDATE_SUCCESS',
     payload: {
@@ -41,9 +61,10 @@ export function charactersLoadUpdateSuccess(characters: any[]) {
     },
   };
 }
+
 export function charactersLoadComicsSuccess(
-  characterDetails: any,
-  comics: any[],
+  characterDetails: Character,
+  comics: Comic[],
 ) {
   return {
     type: '@characters/LOAD_COMICS_SUCCESS',
