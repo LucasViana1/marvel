@@ -8,7 +8,7 @@ export function charactersLoadRequest(privateKey: string, publicKey: string) {
     },
   };
 }
-export function charactersLoadComicsRequest(characterId: number) {
+export function loadCharacterById(characterId: number) {
   return {
     type: '@characters/LOAD_COMICS_REQUEST',
     payload: {
