@@ -23,4 +23,8 @@ export const BodyTextDescription = styled.td`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: rgb(0, 0, 0, 0.9);
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
