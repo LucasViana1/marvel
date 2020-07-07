@@ -1,9 +1,9 @@
 // @flow
-// import * as React from 'react';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { charactersLoadRequest } from '../../store/modules/characters/actions';
+import * as React from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
+import { useHistory } from 'react-router-dom';
 import {
   Container,
   CharacterTable,
@@ -17,29 +17,22 @@ import Pagination from '../../components/Pagination';
 import ListCharacters from '../../components/ListCharacters';
 
 const Home = () => {
-  // const [actualPage, setActualPage] = useState(0);
-  // const [totalPage, setTotalPage] = useState(0);
-  // const [searchPage, setSearchPage] = useState(0);
+  const history = useHistory();
 
-  const dispatch = useDispatch();
+  const { characters, loading } = useSelector(state => state.characters);
 
-  // USADO APENAS PARA TESTES!!!
   useEffect(() => {
-    dispatch(
-      charactersLoadRequest(
-        'b286c0cd5ce1c9aaca4414ee601aee3019f5e744',
-        'e3d2fee5996812a43cde053cb755b88b',
-      ),
-    );
-  }, [dispatch]);
+    if (characters.length === 0 && !loading) {
+      history.push('/');
+    }
+  }, [loading]);
 
   return (
     <>
-      {console.log('refresh 1')}
       <Header pathBack="/" />
       <Container>
         <h1>Lista de personagens</h1>
-        {console.log('refresh 2')}
+
         <CharacterTable>
           <thead>
             <tr>
@@ -49,7 +42,6 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log('refresh 3.1')}
             <ListCharacters />
           </tbody>
         </CharacterTable>

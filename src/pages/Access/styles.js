@@ -2,11 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
-  /* justify-content: center; */
   height: 50vh;
   margin-top: 50px;
   width: 100%;
@@ -34,7 +31,6 @@ export const Form = styled.form`
   }
 `;
 export const Input = styled.input`
-  /* flex: 1; */
   background: #f0f0f5;
   border-radius: 8px;
   border: 0.5px solid #f0f0f5;
@@ -42,7 +38,6 @@ export const Input = styled.input`
   font-size: 16px;
   color: #6c6c80;
   margin-bottom: 10px;
-  /* font-family: monospace, sans-serif; */
   width: 90%;
 
   @media screen and (max-width: 768px) {
@@ -51,7 +46,6 @@ export const Input = styled.input`
 
   &::placeholder {
     color: #77778b;
-    /* font-family: 'MuseoModerno', cursive; */
   }
 `;
 

@@ -1,6 +1,6 @@
 // @flow
 
-import { Character, Comic } from './types';
+import type { Character, Comic } from './types';
 
 export function charactersLoadRequest(privateKey: string, publicKey: string) {
   return {

@@ -23,7 +23,6 @@ export const CharacterTable = styled.table`
   }
 `;
 export const HeadText = styled.th`
-  /* border: 1px solid lightgray; */
   padding: 10px 8px;
   font-size: 18px;
 `;

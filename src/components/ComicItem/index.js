@@ -24,8 +24,6 @@ type Props = {
 };
 
 const ComicItem = ({ comic }: Props) => {
-  // console.log('props comic item');
-  // console.log(comic);
 
   return (
     <Container>

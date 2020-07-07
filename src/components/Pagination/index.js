@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { useState } from 'react';
-// import Moment from 'react-moment';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -9,7 +9,6 @@ import {
   charactersComicsLoadUpdated,
 } from '../../store/modules/characters/actions';
 
-// import { useHistory } from 'react-router-dom';
 import { Container, Form } from './styles';
 
 type Props = {
@@ -17,7 +16,6 @@ type Props = {
 };
 
 const Pagination = ({ comicCharacterSearchById }: Props) => {
-  // const CharacterTableItem = ({ character }: Props) => {
   const [searchPage, setSearchPage] = useState(0);
 
   const { actualPage } = useSelector(state => state.characters);

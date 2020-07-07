@@ -9,7 +9,6 @@ export const Container = styled.section`
   height: 100vh;
   width: 100vw;
   background: transparent;
-  /* background: rgba(0, 0, 0, 0.1); */
   top: 0;
   left: 0;
 `;

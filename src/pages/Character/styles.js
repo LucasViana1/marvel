@@ -5,8 +5,6 @@ export const Container = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* height: 50vh; */
-  /* margin-top: 70px; */
   width: 100%;
 
   h1 {
@@ -33,7 +31,6 @@ export const ContainerImage = styled.div`
   width: 100%;
   img {
     width: 100%;
-    /* width: 40%; */
     max-height: 100%;
     object-fit: cover;
   }
@@ -53,7 +50,6 @@ export const ContainerComics = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 42px; */
 
   h2 {
     margin: 18px 2px;

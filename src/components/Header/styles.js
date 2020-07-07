@@ -12,7 +12,6 @@ export const Container = styled.header`
   padding: 4px 0px;
   justify-content: center;
   padding: 10px;
-  /* background: $purple; */
 `;
 export const Navigation = styled.nav`
   display: flex;
@@ -23,7 +22,6 @@ export const Navigation = styled.nav`
   a,
   button {
     color: rgb(210, 0, 0, 0.9);
-    /* color: rgb(245, 244, 244); */
     display: flex;
     align-items: center;
     text-decoration: none;

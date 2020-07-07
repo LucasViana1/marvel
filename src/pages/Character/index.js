@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-// import { useEffect } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -31,25 +30,18 @@ const Character = () => {
 
   const { characterDetails } = useSelector(state => state.characters);
 
-  // console.log('useSelector(state => state.characters)');
-  // console.log(characterDetails);
-  // console.log(characterDetails.thumbnail);
-  // console.log(characterDetails.thumbnail.path);
-
   useEffect(() => {
-    // DISPATCH CHARACTER BY ID AND COMICS
     dispatch(loadCharacterById(Number(characterId)));
   }, [characterId]);
 
   return (
     <>
       <Header pathBack="/home" />
-      {console.log('RENDER COMICS 1')}
+
       <Container>
         <h1>Detalhes do personagem</h1>
-        {console.log('RENDER COMICS 2')}
+
         <ContainerDetails>
-          {console.log('RENDER COMICS 3')}
           <ContainerImage>
             {characterDetails.thumbnail !== undefined && (
               <img
@@ -61,8 +53,7 @@ const Character = () => {
           </ContainerImage>
 
           <Details>
-            {console.log('RENDER COMICS 4')}
-            <h3>{`Nome: ${characterDetails.name}`}</h3>
+            <h3>{`Nome: ${characterDetails.name || 'Loading...'}`}</h3>
             <p>
               {`Descrição: ${
                 characterDetails.description || 'No description found!'
@@ -72,7 +63,6 @@ const Character = () => {
         </ContainerDetails>
         <Hr />
         <ContainerComics>
-          {console.log('RENDER COMICS 5')}
           <h2>Fascículos</h2>
 
           <ListComics />

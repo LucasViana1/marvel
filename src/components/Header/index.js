@@ -3,7 +3,6 @@ import React from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 import { Container, Navigation } from './styles';
-// import logo from '../../assets/logo.png';
 
 type Props = {
   pathBack: string,

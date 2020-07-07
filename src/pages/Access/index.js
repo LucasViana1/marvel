@@ -14,14 +14,6 @@ const Access = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const { characters } = useSelector(state => state.characters);
-
-  // useEffect(() => {
-  //   if (characters.length !== 0) {
-  //     history.push('/home');
-  //   }
-  // }, [characters, history]);
-
   function handleSubmit(event) {
     if (!privateKey || !publicKey) {
       window.alert('All fields are mandatory!');

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-// import { useState } from 'react';
-// // import Moment from 'react-moment';
+
 import { useSelector } from 'react-redux';
 
 import CharacterTableItem from '../CharacterTableItem';
@@ -12,7 +11,6 @@ const ListCharacters = () => {
 
   return (
     <>
-      {console.log('refresh 3')}
       {characters &&
         characters.map(character => (
           <CharacterTableItem key={character.id} character={character} />
