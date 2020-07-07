@@ -21,6 +21,7 @@ Marvel's Character Search System
 </h3>
 
 <img src="https://i.ibb.co/gRkfBPj/logo.png" width="1200">
+![Alt text](https://i.ibb.co/gRkfBPj/logo.png "Logo Marvel")
 
 ## ☪ Start
 
