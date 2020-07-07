@@ -7,6 +7,8 @@ import {
   charactersLoadSuccess,
   charactersLoadUpdateSuccess,
   charactersLoadComicsSuccess,
+  charactersLoadComicsUpdateSuccess,
+  charactersFailure,
 } from './actions';
 
 function* getCharacters({ payload: { privateKey, publicKey } }) {
@@ -26,12 +28,14 @@ function* getCharacters({ payload: { privateKey, publicKey } }) {
       `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=0`,
     );
 
-    const { results } = response.data.data;
+    const { results, total } = response.data.data;
 
-    // console.log('saga data');
-    // console.log(response);
+    console.log('saga data FIRST');
+    console.log(total);
     // console.log(results);
-    yield put(charactersLoadSuccess(results, timestamp, publicKey, hash));
+    yield put(
+      charactersLoadSuccess(results, timestamp, publicKey, hash, total),
+    );
   } catch (error) {
     // yield put(charactersLoadFailure());
     window.alert('Public or private key invalidates!');
@@ -45,9 +49,65 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
     // console.log('saga request');
     // console.log(privateKey);
     // console.log(publicKey);
-    const { timestamp, publicKey, hash } = yield select(
+    const { timestamp, publicKey, hash, totalCharacters } = yield select(
       state => state.characters,
     );
+    console.log('totalCharacters');
+    console.log(totalCharacters);
+    console.log('quantityPage');
+    console.log(quantityPage);
+
+    // TESTE
+    // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
+    // const publicKey = 'e3d2fee5996812a43cde053cb755b88b';
+    // const timestamp = Math.floor(Date.now() / 1000);
+    // const hash = md5(timestamp + privateKey + publicKey);
+    if (quantityPage < 0 || quantityPage > totalCharacters) {
+      console.log('VALIDAÇÃO');
+      console.log(quantityPage);
+      console.log(totalCharacters);
+      window.alert('Invalid page number');
+      yield put(charactersFailure());
+      return;
+    }
+
+    const response = yield call(
+      api.get,
+      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=${quantityPage}`,
+    );
+
+    console.log(response);
+
+    const { results } = response.data.data;
+
+    const newActualPage = quantityPage / 14;
+
+    // console.log('saga data update');
+    // console.log(response);
+    // console.log(results);
+    yield put(charactersLoadUpdateSuccess(results, newActualPage));
+  } catch (error) {
+    // yield put(charactersLoadFailure());
+    window.alert('Public or private key invalidates!');
+    console.log('error load request ');
+    console.log(error);
+  }
+}
+
+function* getUpdateComics({ payload: { characterId, quantityPage = 0 } }) {
+  try {
+    // console.log('saga request');
+    // console.log(privateKey);
+    // console.log(publicKey);
+    const {
+      timestamp,
+      publicKey,
+      hash,
+      actualPage,
+      totalComics,
+    } = yield select(state => state.characters);
+    console.log('quantityPage');
+    console.log(quantityPage);
 
     // TESTE
     // const privateKey = 'b286c0cd5ce1c9aaca4414ee601aee3019f5e744';
@@ -55,17 +115,44 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
     // const timestamp = Math.floor(Date.now() / 1000);
     // const hash = md5(timestamp + privateKey + publicKey);
 
+    if (quantityPage < 0 || quantityPage > totalComics) {
+      console.log('VALIDAÇÃO');
+      console.log(quantityPage);
+      // console.log(totalCharacters);
+      window.alert('Invalid page number');
+      yield put(charactersFailure());
+      return;
+    }
+
     const response = yield call(
       api.get,
-      `characters?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=${quantityPage}`,
+      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14&offset=${quantityPage}`,
     );
 
+    console.log(response);
+
     const { results } = response.data.data;
+
+    if (results.length === 0) {
+      console.log('VALIDAÇÃO 2');
+      console.log(quantityPage);
+      window.alert('Invalid page number');
+      yield put(charactersFailure());
+      return;
+    }
 
     // console.log('saga data update');
     // console.log(response);
     // console.log(results);
-    yield put(charactersLoadUpdateSuccess(results));
+    if (results.length === 0) {
+      console.log('VALIDAÇÃO 2');
+      console.log(quantityPage);
+      window.alert('Invalid page number');
+      yield put(charactersLoadComicsUpdateSuccess(results, actualPage));
+      return;
+    }
+    const newActualPage = quantityPage / 14;
+    yield put(charactersLoadComicsUpdateSuccess(results, newActualPage));
   } catch (error) {
     // yield put(charactersLoadFailure());
     window.alert('Public or private key invalidates!');
@@ -97,15 +184,15 @@ function* getCharacterById({ payload: { characterId } }) {
 
     const response = yield call(
       api.get,
-      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=10`,
+      `characters/${characterId}/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}&limit=14`,
     );
 
-    const { results } = response.data.data;
+    const { results, total } = response.data.data;
 
-    // console.log('saga data comics');
-    // console.log(response);
+    console.log('saga data comics');
+    console.log(response);
     // console.log(results);
-    yield put(charactersLoadComicsSuccess(character, results));
+    yield put(charactersLoadComicsSuccess(character, results, 0, total));
   } catch (error) {
     // yield put(charactersLoadFailure());
     window.alert('Public or private key invalidates!');
@@ -118,5 +205,6 @@ function* getCharacterById({ payload: { characterId } }) {
 export default all([
   takeLatest('@characters/LOAD_REQUEST', getCharacters),
   takeLatest('@characters/LOAD_UPDATED', getUpdateCharacters),
+  takeLatest('@characters/LOAD_UPDATED_COMICS', getUpdateComics),
   takeLatest('@characters/LOAD_COMICS_REQUEST', getCharacterById),
 ]);
