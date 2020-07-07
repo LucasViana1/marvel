@@ -1,23 +1,6 @@
 // @flow
-type Character = {
-  id: number,
-  description: string,
-  name: string,
-  modified: Date,
-  thumbnail: {
-    path: string,
-    extension: string,
-  },
-};
-type Comic = {
-  title: string,
-  description: string,
-  issueNumber: number,
-  thumbnail: {
-    path: string,
-    extension: string,
-  },
-};
+
+import { Character, Comic } from './types';
 
 export function charactersLoadRequest(privateKey: string, publicKey: string) {
   return {
@@ -42,6 +25,7 @@ export function charactersLoadSuccess(
   timestamp: number,
   publicKey: string,
   hash: string,
+  totalCharacters: number,
 ) {
   return {
     type: '@characters/LOAD_SUCCESS',
@@ -50,14 +34,31 @@ export function charactersLoadSuccess(
       timestamp,
       publicKey,
       hash,
+      totalCharacters,
     },
   };
 }
-export function charactersLoadUpdateSuccess(characters: Character[]) {
+export function charactersLoadUpdateSuccess(
+  characters: Character[],
+  actualPage: number,
+) {
   return {
     type: '@characters/LOAD_UPDATE_SUCCESS',
     payload: {
       characters,
+      actualPage,
+    },
+  };
+}
+export function charactersLoadComicsUpdateSuccess(
+  comics: Comic[],
+  actualPage: number,
+) {
+  return {
+    type: '@characters/LOAD_COMICS_UPDATE_SUCCESS',
+    payload: {
+      comics,
+      actualPage,
     },
   };
 }
@@ -65,12 +66,16 @@ export function charactersLoadUpdateSuccess(characters: Character[]) {
 export function charactersLoadComicsSuccess(
   characterDetails: Character,
   comics: Comic[],
+  actualPage: number,
+  totalComics: number,
 ) {
   return {
     type: '@characters/LOAD_COMICS_SUCCESS',
     payload: {
       characterDetails,
       comics,
+      actualPage,
+      totalComics,
     },
   };
 }
@@ -81,5 +86,22 @@ export function charactersLoadUpdated(quantityPage: number) {
     payload: {
       quantityPage,
     },
+  };
+}
+export function charactersComicsLoadUpdated(
+  characterId: number,
+  quantityPage: number,
+) {
+  return {
+    type: '@characters/LOAD_UPDATED_COMICS',
+    payload: {
+      quantityPage,
+      characterId,
+    },
+  };
+}
+export function charactersFailure() {
+  return {
+    type: '@characters/LOAD_FAILURE',
   };
 }
