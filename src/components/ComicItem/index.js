@@ -9,6 +9,8 @@ import {
   ContainerImage,
 } from './styles';
 
+import formatImageURL from '../../util/formatImageURL';
+
 type Props = {
   comic: {
     title: string,
@@ -28,10 +30,7 @@ const ComicItem = ({ comic }: Props) => {
   return (
     <Container>
       <ContainerImage>
-        <img
-          src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-          alt={comic.title}
-        />
+        <img src={formatImageURL(comic.thumbnail)} alt={comic.title} />
       </ContainerImage>
       <ContainerDetails>
         <Header>
