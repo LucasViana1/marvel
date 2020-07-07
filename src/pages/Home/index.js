@@ -1,21 +1,25 @@
 // @flow
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import * as React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { charactersLoadRequest } from '../../store/modules/characters/actions';
+
 import {
-  charactersLoadRequest,
-  charactersLoadUpdated,
-} from '../../store/modules/characters/actions';
+  Container,
+  CharacterTable,
+  HeadText,
+  HeadTextDescription,
+} from './styles';
 
-import { Container, CharacterTable, HeadText, Pagination } from './styles';
+import Header from '../../components/Header';
 
-import CharacterTableItem from '../../components/CharacterTableItem';
+import Pagination from '../../components/Pagination';
+import ListCharacters from '../../components/ListCharacters';
 
 const Home = () => {
-  const [actualPage, setActualPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(0);
-
-  const { characters } = useSelector(state => state.characters);
+  // const [actualPage, setActualPage] = useState(0);
+  // const [totalPage, setTotalPage] = useState(0);
+  // const [searchPage, setSearchPage] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -29,47 +33,29 @@ const Home = () => {
     );
   }, [dispatch]);
 
-  function handlePage(pageNumber) {
-    // console.log('quantityPage');
-    // console.log(quantityPage);
-    const total = totalPage + pageNumber;
-    dispatch(charactersLoadUpdated(total));
-    setTotalPage(total);
-    setActualPage(total / 14 + 1);
-
-    // console.log('totalPages');
-    // console.log(totalPages);
-  }
-  // console.log('teste');
-  // console.log(useSelector(state => state.characters));
-
   return (
-    <Container>
-      <CharacterTable>
-        <thead>
-          <tr>
-            <HeadText>Nome</HeadText>
-            <HeadText>Descrição</HeadText>
-            <HeadText>Última atualização</HeadText>
-          </tr>
-        </thead>
-        <tbody>
-          {characters &&
-            characters.map(character => (
-              <CharacterTableItem key={character.id} character={character} />
-            ))}
-        </tbody>
-      </CharacterTable>
-      <Pagination>
-        <button type="button" onClick={() => handlePage(-14)}>
-          Anterior
-        </button>
-        <span>{actualPage}</span>
-        <button type="button" onClick={() => handlePage(14)}>
-          Próximo
-        </button>
-      </Pagination>
-    </Container>
+    <>
+      {console.log('refresh 1')}
+      <Header pathBack="/" />
+      <Container>
+        <h1>Lista de personagens</h1>
+        {console.log('refresh 2')}
+        <CharacterTable>
+          <thead>
+            <tr>
+              <HeadText>Nome</HeadText>
+              <HeadTextDescription>Descrição</HeadTextDescription>
+              <HeadText>Última atualização</HeadText>
+            </tr>
+          </thead>
+          <tbody>
+            {console.log('refresh 3.1')}
+            <ListCharacters />
+          </tbody>
+        </CharacterTable>
+        <Pagination comicCharacterSearchById={0} />
+      </Container>
+    </>
   );
 };
 
