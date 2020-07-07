@@ -3,10 +3,19 @@ import styled from 'styled-components';
 export const Container = styled.section`
   display: flex;
   /* align-items: center; */
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* justify-content: center; */
   height: 50vh;
-  margin-top: 70px;
+  margin-top: 50px;
   width: 100%;
+
+  h1 {
+    font-size: 1.7em;
+    margin-bottom: 40px;
+    text-align: center;
+  }
 `;
 export const Form = styled.form`
   display: flex;
@@ -15,13 +24,13 @@ export const Form = styled.form`
   flex-direction: column;
   border: 1px solid gray;
   border-radius: 10px;
-  padding: 0px 30px;
+  padding: 14px 30px;
   box-shadow: 2px 2px rgba(0, 0, 0, 0.205);
   width: 50%;
   background: #fcfcfc;
 
   @media screen and (max-width: 768px) {
-    width: 100%;
+    width: 80%;
   }
 `;
 export const Input = styled.input`
@@ -65,6 +74,6 @@ export const Button = styled.button`
   }
 `;
 export const Title = styled.h2`
-  font-size: 2em;
+  font-size: 1.6em;
   margin-bottom: 26px;
 `;
