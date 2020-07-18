@@ -25,20 +25,19 @@ const Home = () => {
     if (characters.length === 0 && !loading) {
       history.push('/');
     }
-  }, [loading]);
+  }, [loading, history, characters.length]);
 
   return (
     <>
       <Header pathBack="/" />
       <Container>
-        <h1>Lista de personagens</h1>
-
+        <h1> Lista de personagens </h1>
         <CharacterTable>
           <thead>
             <tr>
-              <HeadText>Nome</HeadText>
-              <HeadTextDescription>Descrição</HeadTextDescription>
-              <HeadText>Última atualização</HeadText>
+              <HeadText> Nome </HeadText>
+              <HeadTextDescription> Descrição </HeadTextDescription>
+              <HeadText> Última atualização </HeadText>
             </tr>
           </thead>
           <tbody>

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { loadCharacterById } from '../../store/modules/characters/actions';
 
 import Pagination from '../../components/Pagination';
@@ -22,17 +22,24 @@ import ListComics from '../../components/ListComics';
 import formatImageURL from '../../util/formatImageURL';
 
 const Character = () => {
-  // const [imageURL, setImageURL] = useState('');
-
   const { characterId } = useParams();
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const { characterDetails } = useSelector(state => state.characters);
+  const { characterDetails, characters, loading } = useSelector(
+    state => state.characters,
+  );
 
   useEffect(() => {
     dispatch(loadCharacterById(Number(characterId)));
-  }, [characterId]);
+  }, [characterId, dispatch]);
+
+  useEffect(() => {
+    if (characters.length === 0 && !loading) {
+      history.push('/');
+    }
+  }, [loading, history, characters.length]);
 
   return (
     <>
