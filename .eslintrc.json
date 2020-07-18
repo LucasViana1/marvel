@@ -23,10 +23,11 @@
   "plugins": ["flowtype", "react", "react-hooks", "prettier"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
-    // "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": "off",
     "import/prefer-default-export": "off",
-    "react-hooks/exhaustive-deps": "off",
+    // "react-hooks/exhaustive-deps": "off",
+    "no-alert": "off",
     "react/no-danger": "off",
     "react/jsx-filename-extension": [1, {
       "extensions": [".js", "jsx"]
