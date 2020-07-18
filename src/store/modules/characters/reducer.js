@@ -1,6 +1,24 @@
 // @flow
 
-import type { State, Action } from './types';
+import type { Character, Comic } from './types';
+
+type State = {
+  +timestamp: number,
+  +publicKey: string,
+  +hash: string,
+  +characters: Character[],
+  +comics: Comic[],
+  +characterDetails: Character,
+  +actualPage: number,
+  +totalCharacters: number,
+  +totalComics: number,
+  +loading: boolean,
+};
+
+type Action = {
+  type: string,
+  payload: State,
+};
 
 const INITIAL_STATE = {
   characters: [],

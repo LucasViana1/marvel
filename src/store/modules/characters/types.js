@@ -19,21 +19,3 @@ export type Comic = {
     extension: string,
   },
 };
-
-export type State = {
-  +timestamp: number,
-  +publicKey: string,
-  +hash: string,
-  +characters: Character[],
-  +comics: Comic[],
-  +characterDetails: Character,
-  +actualPage: number,
-  +totalCharacters: number,
-  +totalComics: number,
-  +loading: boolean,
-};
-
-export type Action = {
-  type: string,
-  payload: State,
-};
