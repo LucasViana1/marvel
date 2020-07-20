@@ -55,7 +55,6 @@ const Character = () => {
                 src={formatImageURL(characterDetails.thumbnail)}
                 alt={characterDetails.name}
               />
-              // <img src={imageURL} alt={characterDetails.name} />
             )}
           </ContainerImage>
 
