@@ -56,7 +56,6 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
 
     yield put(charactersLoadUpdateSuccess(results, newActualPage));
   } catch (error) {
-    // yield put(charactersLoadFailure());
     window.alert('Public or private key invalidates!');
     yield put(charactersFailure());
   }
@@ -64,13 +63,9 @@ function* getUpdateCharacters({ payload: { quantityPage } }) {
 
 function* getUpdateComics({ payload: { characterId, quantityPage = 0 } }) {
   try {
-    const {
-      timestamp,
-      publicKey,
-      hash,
-      actualPage,
-      totalComics,
-    } = yield select(state => state.characters);
+    const { timestamp, publicKey, hash, totalComics } = yield select(
+      state => state.characters,
+    );
 
     if (quantityPage < 0 || quantityPage > totalComics) {
       window.alert('Invalid page number');
@@ -91,11 +86,6 @@ function* getUpdateComics({ payload: { characterId, quantityPage = 0 } }) {
       return;
     }
 
-    if (results.length === 0) {
-      window.alert('Invalid page number');
-      yield put(charactersLoadComicsUpdateSuccess(results, actualPage));
-      return;
-    }
     const newActualPage = quantityPage / 14;
     yield put(charactersLoadComicsUpdateSuccess(results, newActualPage));
   } catch (error) {
