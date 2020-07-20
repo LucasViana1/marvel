@@ -38,11 +38,11 @@ https://lucas-marvel.netlify.app/
 - components: reusable components in the application;
 - pages: pages rendered on the screen when accessing their respective routes;
 - services: access to external services, such as the Marvel API;
-- store: store where the global state of the application is maintained through Redux, the module standard was used in the project, for the organization of the action and reducer;
+- store: store where the global state of the application is maintained through Redux, the standard of organization was through modules, for the organization of the action and reducer;
 - routes: definition of application routes and their respective components;
 - styles: definition of global styles;
 - util: location for useful and reusable functions;
-- for the stylization of the components, the styled-components.
+- for the stylization of the components, the stylized components were used.
 
 ## :interrobang: Operation
 
