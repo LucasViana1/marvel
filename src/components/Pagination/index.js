@@ -39,7 +39,7 @@ const Pagination = ({ comicCharacterSearchById }: Props) => {
   const handleSearchPage = event => {
     const total = searchPage * quantityPerPage;
     if (comicCharacterSearchById) {
-      dispatch(charactersComicsLoadUpdated(1009268, total));
+      dispatch(charactersComicsLoadUpdated(comicCharacterSearchById, total));
     } else {
       dispatch(charactersLoadUpdated(total));
     }
